@@ -1,25 +1,23 @@
 # -*- coding: utf-8 -*-
 from api import *
 
-api    =
-secret =
+api    = '1e7c346d11d88c8c3a1a31b0abd8b59d'
+secret = '9388bcc35d274b708cb4463c79211a5e'
 
 coinbene = Coinbene(api, secret)
 
 
-# resp = requests.get("https://api.bithumb.com/public/ticker/BTC")
-# content = resp.json()
-# print(content)
+# 깃허브 api 문서 https://github.com/Coinbene/API-SPOT-v2-Documents/blob/master/openapi-spot-rest-en.md
 
-#  查询最新价
-resp = coinbene.get_ticker('btcusdt')
+#  시세 조회
+resp = coinbene.get_ticker('gom2usdt')
 print(resp)
 # 查询结果:{'timestamp': 1529461186102, 'status': 'ok', 'ticker': 
 #        [{'symbol': 'BTCUSDT', '24hrHigh': '6832.65', 'ask': '6603.77', '24hrVol': '5329.3321', '24hrLow': '6547.0', 'bid': '6598.89', 'last': '6598.90', '24hrAmt': '35754346.714095'}]}
 
 
-#  查询挂单,需要传入参数symbol,depth默认为200
-print(coinbene.get_orderbook('btcusdt',5))
+#  호가창 orderbook 조회
+print(coinbene.get_orderbook('gom2usdt',5))
 # 查询结果:{'status': 'ok', 
 # 　　　　　　　　'orderbook': {
 #        　　　　　　　　　　　　 'asks': [{'quantity': 0.0678, 'price': 6612.78}, 
@@ -36,8 +34,8 @@ print(coinbene.get_orderbook('btcusdt',5))
 # 　　　　　　　　'symbol': 'BTCUSDT'}
 
 
-#  查询成交记录,传参:symbol和size默认为300
-print(coinbene.get_trade('ethusdt',2))
+#  최근 거래 정보 size 300
+print(coinbene.get_trade('gom2usdt',2))
 # 查询结果:{'timestamp': 1529461627036, 
 #         'trades': [{'tradeId': '201806201026349790017791201806201026316910017482', 
 #                     'quantity': '0.24', 
@@ -53,7 +51,7 @@ print(coinbene.get_trade('ethusdt',2))
 #         'symbol': 'ETHUSDT'}
 
 
-# 查询余额,此处以字典形式传参
+# 자산 확인
 # dic = {"apiid":"xxx","secret":"xxx","timestamp":11223112231,"account":"exchange"}
 dic = {'account':'exchange'}
 print(coinbene.post_balance(dic))
@@ -78,14 +76,14 @@ print(coinbene.post_balance(dic))
 # }
 
 
-# 下订单,以字典形式传参
+# 주문하기
 # dic = {"apiid":"xxx","secret":"xxx","timestamp":1122311221131,"type":"buy-limit","price":0.003401,"quantity":1,"symbol":"swtcusdt"}
-dic = {"type":"buy-limit","price":0.003401,"quantity":1,"symbol":"ethusdt"}
+dic = {"type":"buy-limit","price":0.006,"quantity":20,"symbol":"gom2usdt"}
 print(coinbene.post_order_place(dic))
 # 查询结果:{'status': 'ok', 'timestamp': 1529462625853, 'orderid': '201806201043458241111111'}
 
 
-#　按订单号查询委托,以字典形式传参
+#　주문조회
 dic = {"orderid":201806201043458241111111}
 print(coinbene.post_info(dic))
 #  查询结果:{
@@ -102,7 +100,7 @@ print(coinbene.post_info(dic))
 #         'timestamp': 1529463050492}
 
 # 查询当前委托,以字典形式传参
-dic = {"symbol":"swtcusdt"}
+dic = {"symbol":"gom2usdt"}
 print(coinbene.post_open_orders(dic))
 #  查询结果:{
 #     "orders":{
