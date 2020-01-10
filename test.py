@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from api import *
 
-api    = '1e7c346d11d88c8c3a1a31b0abd8b59d'
-secret = '9388bcc35d274b708cb4463c79211a5e'
+api    = ''
+secret = ''
 
 coinbene = Coinbene(api, secret)
 
